@@ -82,6 +82,8 @@ export default class DatePicker extends React.Component {
     onChange: PropTypes.func.isRequired,
     onSelect: PropTypes.func,
     onWeekSelect: PropTypes.func,
+    onCalendarOpen: PropTypes.func,
+    onCalendarClose: PropTypes.func,
     onClickOutside: PropTypes.func,
     onChangeRaw: PropTypes.func,
     onFocus: PropTypes.func,
@@ -230,6 +232,11 @@ export default class DatePicker extends React.Component {
           ? this.state.preSelection
           : this.calcInitialState().preSelection
     });
+    if (open && this.props.onCalendarOpen) {
+      this.props.onCalendarOpen();
+    } else if (!open && this.props.onCalendarClose) {
+      this.props.onCalendarClose();
+    }
   };
 
   handleFocus = event => {
